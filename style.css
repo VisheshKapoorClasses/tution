@@ -10,6 +10,32 @@
     margin-bottom: 0; /* Remove or reduce the bottom margin */
     padding-bottom: 10px; /* Optional: Adjust padding to your preference */
 }
+.cta {
+  width: 100%;  
+  min-height: 100vh;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: center;  
+  align-items: center;  
+  text-align: center;  
+  background: #333;  /* Dark background for contrast */
+  padding: 20px;
+}
+
+.cta h6,  
+.cta p,  
+.hero-btn {  
+  color: white;  /* Ensuring all text is white */
+}
+.about-us {
+  border: 8px solid #007BFF; /* Blue border */
+  border-radius: 10px; /* Smooth edges */
+  padding: 20px; /* Space inside the border */
+  background: #f9f9f9; /* Light background for contrast */
+  margin: 20px auto; /* Centering */
+  max-width: 90%; /* Ensures responsiveness */
+}
+
 
 /* If there's any large gap specifically between 'footer' and 'cta' section */
 footer {
