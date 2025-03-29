@@ -4,12 +4,51 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Adjust the margin/padding between the sections */
-.cta, .footer {
-    margin-bottom: 0; /* Remove or reduce the bottom margin */
-    padding-bottom: 10px; /* Optional: Adjust padding to your preference */
+.icons {
+  border: 4px solid #007BFF; /* Blue border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px; /* Space inside the border */
+  display: inline-block; /* Keeps it tight around icons */
+  margin-top: 10px; /* Spacing from the text above */
 }
+
+.social-icon {
+  color: #007BFF; /* Blue icon color */
+  font-size: 24px; /* Adjust icon size */
+  margin: 0 10px; /* Space between icons */
+  transition: 0.3s ease-in-out;
+}
+
+.social-icon:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+.footer {
+  border: 8px solid #007BFF; /* Blue border */
+  border-radius: 10px; /* Smooth edges */
+  padding: 20px; /* Space inside the border */
+  background: #f9f9f9; /* Light background for contrast */
+  text-align: center; /* Centering text */
+  max-width: 90%; /* Ensures responsiveness */
+  margin: 20px auto; /* Centers the footer */
+}
+
+.footer h4,  
+.footer p,  
+.footer .icons {  
+  color: #000; /* Ensures text is visible */
+}
+
+.social-icon {
+  font-size: 24px; /* Increase icon size */
+  margin: 0 10px; /* Space between icons */
+  color: #007BFF; /* Blue icon color */
+  text-decoration: none; /* Remove underline */
+}
+
+.social-icon:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
 .cta {
   width: 100%;  
   min-height: 100vh;  
@@ -36,6 +75,20 @@
   max-width: 90%; /* Ensures responsiveness */
 }
 
+
+.hero-btn {
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  background: red;  /* Optional button color */
+  border: none;
+  text-decoration: none;
+}
+
+/* Adjust the margin/padding between the sections */
+.cta, .footer {
+    margin-bottom: 0; /* Remove or reduce the bottom margin */
+    padding-bottom: 10px; /* Optional: Adjust padding to your preference */
+}
 
 /* If there's any large gap specifically between 'footer' and 'cta' section */
 footer {
