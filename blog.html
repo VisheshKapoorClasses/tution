@@ -73,15 +73,121 @@
           <br>
            <p> At Vishesh Kapoor Classes, I ensure that every student gets quality education, real-world learning, and motivation to push through any challenges. If you’re looking for guidance in commerce subjects or CA Foundation, let’s walk this journey together.</p>
          <h2> Remember, failure is not the end — it’s just the beginning of your success story.</h2>
-            <div class="comment-box">
-            <h3>Leave A Comment</h3>
-            <form class="comment-form">
-              <input type="text" placeholder="Enter Name">
-              <input type="email" placeholder="Enter Your Class">
-              <textarea rows="5" placeholder="Your Comment"></textarea>
-              <button type="submit" class="hero-btn red-btn">Post Comment</button>
-            </form>
-          </div>
+<style>
+    .comment-section {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .comment-section h2 {
+        color: #007bff;
+    }
+    .comment-box, .comments {
+        width: 100%;
+        max-width: 800px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .comment {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .comment:last-child {
+        border-bottom: none;
+    }
+    .comment strong {
+        color: #007bff;
+    }
+    .comment .timestamp {
+        display: block;
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+    }
+</style>
+
+<div class="comment-section">
+    <div class="comment-box">
+        <h2>Leave a Comment</h2>
+        <input type="text" id="name" placeholder="Your Name" required>
+        <textarea id="comment" placeholder="Your Comment" required></textarea>
+        <button onclick="postComment()">Submit</button>
+    </div>
+    
+    <div class="comments">
+        <h2>Comments</h2>
+        <div id="comments"></div>
+    </div>
+</div>
+
+<script>
+    const SHEETDB_API = 'YOUR_SHEETDB_API_URL';
+    
+    function postComment() {
+        let name = document.getElementById('name').value;
+        let comment = document.getElementById('comment').value;
+        let timestamp = new Date().toLocaleString();
+        
+        if (name && comment) {
+            fetch(SHEETDB_API, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({data: [{"name": name, "comment": comment, "timestamp": timestamp}]})
+            })
+            .then(response => response.json())
+            .then(() => {
+                document.getElementById('name').value = '';
+                document.getElementById('comment').value = '';
+                loadComments();
+            });
+        }
+    }
+    
+    function loadComments() {
+        fetch(SHEETDB_API)
+            .then(response => response.json())
+            .then(data => {
+                let commentsSection = document.getElementById('comments');
+                commentsSection.innerHTML = '';
+                data.forEach(entry => {
+                    let commentBlock = `<div class="comment"><strong>${entry.name}</strong>: ${entry.comment}<span class="timestamp">${entry.timestamp || 'No timestamp'}</span></div>`;
+                    commentsSection.innerHTML += commentBlock;
+                });
+            });
+    }
+    
+    document.addEventListener("DOMContentLoaded", loadComments);
+</script>
+
         
         
         </div>
