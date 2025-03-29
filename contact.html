@@ -44,35 +44,99 @@
           <div>
             <i class="fa-solid fa-house"></i>
             <span>
-            <h5>XYZ Road, ABC Building</h5>
-            <p>Tbilis, Dighomi</p>
+            <h5>769/37, Gali No. 2, Ekta Nagar</h5>
+            <p>Roorkee Road, Meerut</p>
           </span>
           </div>
           <div>
             <i class="fa-solid fa-phone"></i>
             <span>
-            <h5>+995995302</h5>
-            <p>Monday to Saturday, 10AM to 6PM</p>
+            <h5>+91 8938921141</h5>
+            <p>Monday to Saturday, 10AM to 7PM</p>
           </span>
           </div>
           <div>
             <i class="fa-solid fa-envelope"></i>
             <span>
-            <h5>info@mail.com</h5>
+            <h5>visheshkapoor121@gmail.com</h5>
             <p>Email us </p>
           </span>
           </div>
         </div>
-        <div class="contact-col">
-          <form action="form-handler.php" method = "post">
-            <input type="text" name="name" placeholder="Enter Your Name" required>
-            <input type="email" name="email" placeholder="Enter Email" required>
-            <input type="text" name="subject" placeholder="Enter Your Subject" required>
-            <textarea rows="8" name="message" placeholder="Message" required></textarea>
-            <button type="submit" class="hero-btn red-btn">Send Message</button>
-            
+        <section class="enroll-form">
+          <h1>Join Our Exclusive Classes</h1>
+          <p>Register now and be part of an elite learning experience.</p>
+          <form id="enrollmentForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Phone Number" required>
+            <select name="course" required>
+              <option value="">Select Course</option>
+              <option value="Class 11">Class 11</option>
+              <option value="Class 12">Class 12</option>
+              <option value="CA Foundation">CA Foundation</option>
+            </select>
+            <button type="submit">Enroll Now</button>
           </form>
-        </div>
+        </section>
+        
+        <style>
+        .enroll-form {
+          background: linear-gradient(135deg, #6e8efb, #a777e3);
+          padding: 30px;
+          text-align: center;
+          border-radius: 12px;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          max-width: 500px;
+          margin: 40px auto;
+        }
+        .enroll-form h1 {
+          font-size: 24px;
+          color: #fff;
+          margin-bottom: 10px;
+        }
+        .enroll-form p {
+          font-size: 16px;
+          color: #f3f3f3;
+          margin-bottom: 20px;
+        }
+        .enroll-form input, .enroll-form select {
+          width: 100%;
+          padding: 10px;
+          margin: 10px 0;
+          border: none;
+          border-radius: 6px;
+          font-size: 16px;
+        }
+        .enroll-form button {
+          width: 100%;
+          padding: 12px;
+          background: #ff9800;
+          border: none;
+          color: #fff;
+          font-size: 18px;
+          cursor: pointer;
+          border-radius: 6px;
+          transition: background 0.3s ease;
+        }
+        .enroll-form button:hover {
+          background: #e68900;
+        }
+        </style>
+        
+        <script>
+        document.getElementById("enrollmentForm").addEventListener("submit", function(event) {
+          event.preventDefault();
+          fetch("https://sheetdb.io/api/v1/81tkj4ujj2dnp", {
+            method: "POST",
+            body: new FormData(this)
+          }).then(response => response.json()).then(data => {
+            alert("Successfully Enrolled!");
+          }).catch(error => {
+            alert("Error submitting form. Please try again.");
+          });
+        });
+        </script>
       </div>
     </section>
 
@@ -82,14 +146,14 @@
 
     <section class="footer">
       <h4>About Us</h4>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur error asperiores vero vel incidunt sit!</p>
+      <p>It all started with a dream to redefine commerce education with clarity, practicality, and a passion for teaching. <br> Today, that dream is a reality, empowering students to excel with knowledge that goes beyond textbooks. <br> Remember, failures are just stepping stones to success learn from them, rise stronger, and keep moving forward!</p>
       <div class="icons">
         <i class="fa-brands fa-facebook"></i>
         <i class="fa-brands fa-twitter"></i>
         <i class="fa-brands fa-instagram"></i>
         <i class="fa-brands fa-linkedin"></i>
       </div>
-      <p>Made Width <i class="fa-solid fa-heart"></i> by Me Papuna</p>
+      <p>Made With <i class="fa-solid fa-heart"></i> by Me, Vishesh
     </section>
 
     <script src="script.js"></script>
