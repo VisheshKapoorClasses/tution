@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <body>
@@ -31,36 +31,90 @@
       <h1>About Us</h1>
     </section>
 
-    <!-- about us content -->
+    <style>
+      /* ----- ABOUT US START HERE -------- */
 
-    <section class="about-us">
-      <div class="row" >
-        <div class="about-col" >
-          <h1>The Journey of Vishesh Kapoor: From Struggles to Success</h1>
-          <p>Life has never been a straight road for me; it was a path filled with sharp turns, deep potholes, and moments of complete darkness. But if there’s one thing I’ve learned, it’s that resilience and belief can turn even the most impossible dreams into reality. My name is Vishesh Kapoor, and my journey from an ambitious student to a recognized educator, video editor, and CA finalist has been nothing short of a rollercoaster ride.
+.sub-header {
+  height: 50vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
+    url(./images/background.jpg);
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+}
+.sub-header h1 {
+  margin-top: 50px;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
 
-It all started with an insatiable hunger for knowledge. I wasn’t just another commerce student—I was someone who wanted to master the subjects, understand their depths, and apply them in the real world. Scoring 91% in Class 12 and earning exemptions in CA Foundation & CA Intermediate were not just numbers for me; they were a testament to my discipline and dedication. But academic excellence alone wasn’t enough; I wanted to make an impact, to create something of my own.
+.about-us {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 5%;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+}
+.about-us img {
+  width: 80%;
+  margin: auto;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+.about-col {
+  flex-basis: 48%;
+  padding: 30px 2px;
+}
+.about-col img {
+  width: 100%;
+  border-radius: 10px;
+}
+.about-col h1 {
+  padding-top: 0;
+  font-size: 2rem;
+  color: #00ffff;
+  text-shadow: 0 0 8px #00ffff, 0 0 15px #00ffff;
+}
+.about-col p {
+  padding: 15px 0 25px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #bbb;
+}
+.red-btn {
+  border: 1px solid #f44336;
+  background: transparent;
+  color: #f44336;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+.red-btn:hover {
+  color: #fff;
+  background: #f44336;
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+  transform: scale(1.05);
+}
 
-Then came the storm. The road to success is never smooth, and mine was no different. The journey of pursuing CA was brutal—I faced multiple failures that made me question my own abilities. There were times when everything seemed to fall apart, when self-doubt crept in like an unwelcome guest. There were days when I locked myself in my room, staring at the books, wondering if all the effort was worth it. But every time I hit rock bottom, I reminded myself—failure is not the end, it’s a stepping stone. I had two choices: accept defeat or rise again, stronger than before.
-
-Amidst my academic struggles, I found solace in another passion—video editing. With more than three years of experience and over 350 videos edited, I honed my skills, working tirelessly to perfect my craft. I even got recognized by Dainik Jagran, a national newspaper, for my exceptional performance in CA Foundation as well as CA Intermediate. That recognition wasn’t just an achievement—it was a symbol that hard work never goes unnoticed.
-
-But my true calling was teaching. I realized that students don’t fail because they lack intelligence, but because they lack proper guidance. That’s when Vishesh Kapoor Classes was born—a coaching center built not just on academic knowledge, but on experience, struggle, and a vision to teach through practical applications. I wanted to create a place where students could learn, not just for exams, but for life. With a structured curriculum, smart class setup, and a hands-on approach, I ensured that no student ever felt lost in the vast ocean of commerce subjects.
-
-Building this coaching institute wasn’t easy. There were financial struggles, doubts from people around me, and moments when I wondered if it would ever work. But my belief never wavered. I had failed, I had stumbled, but I had also stood back up every single time. Today, Vishesh Kapoor Classes is more than just a coaching center; it’s a movement that empowers students to believe in themselves.
-
-My story isn’t about overnight success; it’s about falling, breaking, rebuilding, and eventually conquering. And if there’s one lesson I want every student to take away from this—it’s that failure is not the opposite of success, it’s a part of it. Keep pushing, keep believing, and one day, your struggles will turn into your greatest success story.
-
-</p>
-          <a href="" class="hero-btn red-btn">EXPLORE NOW</a>
-        </div>
-        <div class="about-col">
-          <img src="images/about.jpg" alt="">
-        </div>
-      </div>
-    </section>
-      <style>
-        #h5b_whatsapp_chat {
+.about-col h1 {
+  font-size: 2.5rem;
+  color: #00aaff; /* Your bright blue color */
+  text-shadow: -2px -2px 0 black,  
+                2px -2px 0 black,  
+               -2px  2px 0 black,  
+                2px  2px 0 black;
+}
+#h5b_whatsapp_chat {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -81,7 +135,74 @@ My story isn’t about overnight success; it’s about falling, breaking, rebuil
     transform: scale(1.2) rotate(10deg);
 }
 
-        </style>
+.about-col p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+  text-align: justify;
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.4); /* Subtle highlight */
+  border-left: 4px solid #00aaff; /* Accent border */
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.about-col p::first-line {
+  font-weight: bold;
+  color: #fff; /* Emphasizing the first line */
+}
+
+      </style>
+    <!-- about us content -->
+
+    <section class="about-us">
+      <div class="row" >
+        <div class="about-col">
+          <h1>The Journey of Vishesh Kapoor: From Struggles to Success</h1>
+        
+          <h2>The Road Filled with Challenges</h2>
+          <p>Life has never been a straight road for me; it was a path filled with sharp turns, deep potholes, and moments of complete darkness. But if there’s one thing I’ve learned, it’s that resilience and belief can turn even the most impossible dreams into reality.</p>
+        
+          <p>My name is Vishesh Kapoor, and my journey from an ambitious student to a recognized educator, video editor, and CA finalist has been nothing short of a rollercoaster ride.</p>
+        
+          <h2>A Passion for Knowledge</h2>
+          <p>It all started with an insatiable hunger for knowledge. I wasn’t just another commerce student—I was someone who wanted to master the subjects, understand their depths, and apply them in the real world.</p>
+        
+          <p>Scoring 91% in Class 12 and earning exemptions in CA Foundation & CA Intermediate were not just numbers for me; they were a testament to my discipline and dedication. But academic excellence alone wasn’t enough; I wanted to make an impact, to create something of my own.</p>
+        
+          <h2>Facing the Storm</h2>
+          <p>Then came the storm. The road to success is never smooth, and mine was no different. The journey of pursuing CA was brutal—I faced multiple failures that made me question my own abilities.</p>
+        
+          <p>There were times when everything seemed to fall apart when self-doubt crept in like an unwelcome guest. There were days when I locked myself in my room, staring at the books, wondering if all the effort was worth it. But every time I hit rock bottom, I reminded myself—failure is not the end, it’s a stepping stone. I had two choices: accept defeat or rise again, stronger than before.</p>
+        
+          <h2>Discovering a New Passion: Video Editing</h2>
+          <p>Amidst my academic struggles, I found solace in another passion—video editing. With more than three years of experience and over 350 videos edited, I honed my skills, working tirelessly to perfect my craft.</p>
+        
+          <p>I even got recognized by Dainik Jagran, a national newspaper, for my exceptional performance in CA Foundation as well as CA Intermediate. That recognition wasn’t just an achievement—it was a symbol that hard work never goes unnoticed.</p>
+        
+          <h2>Teaching: The True Calling</h2>
+          <p>But my true calling was teaching. I realized that students don’t fail because they lack intelligence, but because they lack proper guidance. That’s when Vishesh Kapoor Classes was born—a coaching center built not just on academic knowledge, but on experience, struggle, and a vision to teach through practical applications.</p>
+        
+          <p>I wanted to create a place where students could learn, not just for exams, but for life. With a structured curriculum, smart class setup, and a hands-on approach, I ensured that no student ever felt lost in the vast ocean of commerce subjects.</p>
+        
+          <h2>Overcoming the Odds</h2>
+          <p>Building this coaching institute wasn’t easy. There were financial struggles, doubts from people around me, and moments when I wondered if it would ever work. But my belief never wavered.</p>
+        
+          <p>I had failed, I had stumbled, but I had also stood back up every single time. Today, Vishesh Kapoor Classes is more than just a coaching center; it’s a movement that empowers students to believe in themselves.</p>
+        
+          <h2>The Final Lesson</h2>
+          <p>My story isn’t about overnight success; it’s about falling, breaking, rebuilding, and eventually conquering. And if there’s one lesson I want every student to take away from this—it’s that failure is not the opposite of success, it’s a part of it.</p>
+        
+          <p>Keep pushing, keep believing, and one day, your struggles will turn into your greatest success story.</p>
+        
+        
+          <a href="" class="hero-btn red-btn">EXPLORE NOW</a>
+        </div>
+        <div class="about-col">
+          <img src="images/about.jpg" alt="">
+        </div>
+      </div>
+    </section>
 
 
 
@@ -94,12 +215,12 @@ My story isn’t about overnight success; it’s about falling, breaking, rebuil
         <i class="fa-brands fa-instagram"></i>
         <i class="fa-brands fa-linkedin"></i>
       </div>
-          <div id="h5b_whatsapp_chat">
+      <p>Made With <i class="fa-solid fa-heart"></i> by Me, Papuna</p>
+    </section>
+    <div id="h5b_whatsapp_chat">
       <a href="https://api.whatsapp.com/send?text=hii i am looking for tution&phone=9837809547" target="_blank" data-message="[message]" data-number="[Phone Number]">
       <img src="https://cdn.shopify.com/s/files/1/0070/3666/5911/files/icon_only_old.png?465/" alt="Whatsapp Icon" /></a>
     </div>
-      <p>Made With <i class="fa-solid fa-heart"></i> by Me, Papuna</p>
-    </section>
 
     <script src="script.js"></script>
   </body>
