@@ -477,6 +477,27 @@
       .contact-link:hover {
           background-color: #0088cc;
       }
+      #h5b_whatsapp_chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#h5b_whatsapp_chat a img {
+    width: 65px; /* Increased size */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+#h5b_whatsapp_chat a img:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
   </style>
       <!-- FAQ Section -->
       <section class="faq-section">
@@ -532,6 +553,10 @@
         <a href="https://www.linkedin.com" target="_blank" class="social-icon" aria-label="LinkedIn">
             <i class="fa-brands fa-linkedin"></i>
         </a>
+    </div>
+          <div id="h5b_whatsapp_chat">
+      <a href="https://api.whatsapp.com/send?text=hii i am looking for tution&phone=9837809547" target="_blank" data-message="[message]" data-number="[Phone Number]">
+      <img src="https://cdn.shopify.com/s/files/1/0070/3666/5911/files/icon_only_old.png?465/" alt="Whatsapp Icon" /></a>
     </div>
     
       <p>Made With <i class="fa-solid fa-heart"></i> by Me, Vishesh</p>
