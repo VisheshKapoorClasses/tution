@@ -103,7 +103,7 @@
   
           async function submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersion, isMobile) {
               // Check if the IP address already exists in SheetDB
-              let existingData = await fetch('https://sheetdb.io/api/v1/sn2qfqeidyhhl')
+              let existingData = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn')
                                         .then(res => res.json())
                                         .catch(err => console.error('Error fetching data:', err));
   
@@ -126,7 +126,7 @@
   
                   // Send the update to SheetDB for the existing row
                   try {
-                      await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/${existingEntry.id}`, {
+                      await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/${existingEntry.id}`, {
                           method: 'PUT',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify(updateData)
@@ -158,7 +158,7 @@
   
               // Submit the data to SheetDB for a new entry
               try {
-                  let response = await fetch('https://sheetdb.io/api/v1/sn2qfqeidyhhl', {
+                  let response = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify(visitorInfo)
@@ -298,7 +298,7 @@
           course: courseInput
         };
       
-        fetch("https://sheetdb.io/api/v1/81tkj4ujj2dnp", {
+        fetch("https://sheetdb.io/api/v1/zp2nef7jdzvh2", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(requestData)
