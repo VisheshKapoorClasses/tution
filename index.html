@@ -132,11 +132,7 @@
                           body: JSON.stringify(updateData)
                       });
                       console.log('Row updated with new geolocation data.');
-                      await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/${existingEntry.id}`, {
-                          method: 'PUT',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify(updateData)
-                      });
+
                   } catch (error) {
                       console.error('Error updating row:', error);
                   }
