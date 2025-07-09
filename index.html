@@ -38,145 +38,135 @@
     </section>
 
    
-        <!-- tracking-->
-      <section style="display: none;" id="tracking-section">
-      <script>
-          async function collectData() {
-              // Fetch IP address and geolocation using ipapi or any other IP service
-              let ipData = await fetch('https://ipapi.co/json/').then(res => res.json()).catch(() => ({
-                  ip: 'Unknown',
-                  city: 'Unknown',
-                  region: 'Unknown',
-                  country: 'Unknown',
-                  latitude: 'Unknown',
-                  longitude: 'Unknown'
-              }));
-  
-              console.log('IP API Response:', ipData);  // Log the full response
-  
-              let ip = ipData.ip;
-              let ipCity = ipData.city;
-              let ipRegion = ipData.region;
-              let ipLatitude = ipData.latitude;
-              let ipLongitude = ipData.longitude;
-  
-              // Log the extracted values
-              console.log('Extracted Values - IP:', ip, 'City:', ipCity, 'Region:', ipRegion);
-  
-              // Fetch the browser information (version, platform, etc.)
-              let userAgent = navigator.userAgent;
-              let browserVersion = userAgent.match(/(Chrome|Firefox|Safari|Edge)\/(\d+\.\d+)/);
-              let browser = browserVersion ? browserVersion[1] : 'Unknown';
-              let browserVersionNumber = browserVersion ? browserVersion[2] : 'Unknown';
-  
-              // Check if the user is on a mobile device
-              let isMobile = /Mobi|Android|iPhone|iPad/i.test(userAgent);
-  
-              // Log the browser and device info
-              console.log('Browser:', browser, 'Version:', browserVersionNumber, 'Mobile:', isMobile);
-  
-              // Fetch the user's current location if permission is granted
-              let geoLatitude = 'Unknown';
-              let geoLongitude = 'Unknown';
-              let geoAllowed = 'No';
-  
-              if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(position => {
-                      geoLatitude = position.coords.latitude;
-                      geoLongitude = position.coords.longitude;
-                      geoAllowed = 'Yes';
-                      console.log('Geo location granted:', geoLatitude, geoLongitude);
-                      
-                      // Now submit the data (IP and geo data, browser version)
-                      submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
-                  }, () => {
-                      console.log('Geo location not granted');
-                      // If geolocation is denied, still submit the IP-based data with empty geo values
-                      submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
-                  });
-              } else {
-                  // If geolocation is not supported, still submit the IP-based data with empty geo values
-                  console.log('Geo location not supported');
-                  submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
-              }
-          }
-  
-          async function submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersion, isMobile) {
-              // Check if the IP address already exists in SheetDB
-              let existingData = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn')
-                                        .then(res => res.json())
-                                        .catch(err => console.error('Error fetching data:', err));
-  
-              // Check if the IP address already exists
-              let ipExists = existingData.some(entry => entry.ip_address === ip);
-  
-              if (ipExists) {
-                  // If IP exists, update the existing row with new data
-                  console.log('IP found, updating row with new geolocation data.');
-  
-                  // Find the entry with the matching IP and update geolocation if allowed
-                  let existingEntry = existingData.find(entry => entry.ip_address === ip);
-                  let updateData = {
-                      geo_latitude: geoLatitude !== 'Unknown' ? geoLatitude : existingEntry.geo_latitude,
-                      geo_longitude: geoLongitude !== 'Unknown' ? geoLongitude : existingEntry.geo_longitude,
-                      geo_allowed: geoAllowed !== 'No' ? geoAllowed : existingEntry.geo_allowed,
-                      city: ipCity, // Add city
-                      region: ipRegion // Add region
-                  };
-  
-                  // Send the update to SheetDB for the existing row
-                  try {
-                      await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/${existingEntry.id}`, {
-                          method: 'PUT',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify(updateData)
-                      });
-                      console.log('Row updated with new geolocation data.');
+<!-- tracking-->
+<section style="display: none;" id="tracking-section">
+  <script>
+    async function collectData() {
+      let ipData = await fetch('https://ipapi.co/json/')
+        .then(res => res.json())
+        .catch(() => ({
+          ip: 'Unknown',
+          city: 'Unknown',
+          region: 'Unknown',
+          country: 'Unknown',
+          latitude: 'Unknown',
+          longitude: 'Unknown'
+        }));
 
-                  } catch (error) {
-                      console.error('Error updating row:', error);
-                  }
-                  return;
-              }
-  
-              // Prepare the data to be sent to SheetDB for a new entry
-              let visitorInfo = {
-                  ip_address: ip,
-                  ip_city: ipCity,
-                  ip_region: ipRegion,
-                  ip_latitude: ipLatitude,
-                  ip_longitude: ipLongitude,
-                  geo_latitude: geoLatitude,
-                  geo_longitude: geoLongitude,
-                  geo_allowed: geoAllowed,
-                  browser: browser,
-                  browser_version: browserVersion,
-                  is_mobile: isMobile ? 'Yes' : 'No'
-              };
-  
-              // Log the data being sent
-              console.log('Data to be sent to SheetDB:', visitorInfo);
-  
-              // Submit the data to SheetDB for a new entry
-              try {
-                  let response = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify(visitorInfo)
-                  });
-  
-                  // Log the response from SheetDB
-                  let responseData = await response.json();
-                  console.log('Response from SheetDB:', responseData);
-              } catch (error) {
-                  console.error('Error submitting data:', error);
-              }
+      console.log('IP API Response:', ipData);
+
+      let ip = ipData.ip;
+      let ipCity = ipData.city;
+      let ipRegion = ipData.region;
+      let ipLatitude = ipData.latitude;
+      let ipLongitude = ipData.longitude;
+
+      let userAgent = navigator.userAgent;
+      let browserVersion = userAgent.match(/(Chrome|Firefox|Safari|Edge)\/(\d+\.\d+)/);
+      let browser = browserVersion ? browserVersion[1] : 'Unknown';
+      let browserVersionNumber = browserVersion ? browserVersion[2] : 'Unknown';
+      let isMobile = /Mobi|Android|iPhone|iPad/i.test(userAgent);
+
+      let geoLatitude = 'Unknown';
+      let geoLongitude = 'Unknown';
+      let geoAllowed = 'No';
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            geoLatitude = position.coords.latitude;
+            geoLongitude = position.coords.longitude;
+            geoAllowed = 'Yes';
+            console.log('Geo location granted:', geoLatitude, geoLongitude);
+            submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
+          },
+          () => {
+            console.log('Geo location not granted');
+            submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
           }
-  
-          // Call the function to collect and send data
-          collectData();
-      </script>
-  </section>
+        );
+      } else {
+        console.log('Geo location not supported');
+        submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
+      }
+    }
+
+    async function submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersion, isMobile) {
+      let existingData = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn')
+        .then(res => res.json())
+        .catch(err => {
+          console.error('Error fetching data:', err);
+          return [];
+        });
+
+      let ipExists = existingData.some(entry => entry.ip_address === ip);
+
+      if (ipExists) {
+        console.log('IP found, updating row with new geolocation data.');
+
+        let existingEntry = existingData.find(entry => entry.ip_address === ip);
+        let updateData = {
+          geo_latitude: geoLatitude !== 'Unknown' ? geoLatitude : existingEntry.geo_latitude,
+          geo_longitude: geoLongitude !== 'Unknown' ? geoLongitude : existingEntry.geo_longitude,
+          geo_allowed: geoAllowed !== 'No' ? geoAllowed : existingEntry.geo_allowed,
+          city: ipCity,
+          region: ipRegion
+        };
+
+        try {
+          await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: updateData })
+          });
+
+          await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: updateData })
+          });
+
+          console.log('Row updated with new geolocation data.');
+        } catch (error) {
+          console.error('Error updating row:', error);
+        }
+
+        return;
+      }
+
+      let visitorInfo = {
+        ip_address: ip,
+        ip_city: ipCity,
+        ip_region: ipRegion,
+        ip_latitude: ipLatitude,
+        ip_longitude: ipLongitude,
+        geo_latitude: geoLatitude,
+        geo_longitude: geoLongitude,
+        geo_allowed: geoAllowed,
+        browser: browser,
+        browser_version: browserVersion,
+        is_mobile: isMobile ? 'Yes' : 'No'
+      };
+
+      console.log('Data to be sent to SheetDB:', visitorInfo);
+
+      try {
+        let response = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(visitorInfo)
+        });
+
+        let responseData = await response.json();
+        console.log('Response from SheetDB:', responseData);
+      } catch (error) {
+        console.error('Error submitting data:', error);
+      }
+    }
+
+    collectData();
+  </script>
+</section>
 
 
       <!-- course -->
