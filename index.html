@@ -72,19 +72,17 @@
       let geoAllowed = 'No';
 
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            geoLatitude = position.coords.latitude;
-            geoLongitude = position.coords.longitude;
-            geoAllowed = 'Yes';
-            console.log('Geo location granted:', geoLatitude, geoLongitude);
-            submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
-          },
-          () => {
-            console.log('Geo location not granted');
-            submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
-          }
-        );
+        navigator.geolocation.getCurrentPosition(position => {
+          geoLatitude = position.coords.latitude;
+          geoLongitude = position.coords.longitude;
+          geoAllowed = 'Yes';
+          console.log('Geo location granted:', geoLatitude, geoLongitude);
+
+          submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
+        }, () => {
+          console.log('Geo location not granted');
+          submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
+        });
       } else {
         console.log('Geo location not supported');
         submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
@@ -92,49 +90,15 @@
     }
 
     async function submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersion, isMobile) {
-      let existingData = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn')
-        .then(res => res.json())
-        .catch(err => {
-          console.error('Error fetching data:', err);
-          return [];
-        });
+      const updateData = {
+        geo_latitude: geoLatitude,
+        geo_longitude: geoLongitude,
+        geo_allowed: geoAllowed,
+        city: ipCity,
+        region: ipRegion
+      };
 
-      let ipExists = existingData.some(entry => entry.ip_address === ip);
-
-      if (ipExists) {
-        console.log('IP found, updating row with new geolocation data.');
-
-        let existingEntry = existingData.find(entry => entry.ip_address === ip);
-        let updateData = {
-          geo_latitude: geoLatitude !== 'Unknown' ? geoLatitude : existingEntry.geo_latitude,
-          geo_longitude: geoLongitude !== 'Unknown' ? geoLongitude : existingEntry.geo_longitude,
-          geo_allowed: geoAllowed !== 'No' ? geoAllowed : existingEntry.geo_allowed,
-          city: ipCity,
-          region: ipRegion
-        };
-
-        try {
-          await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: updateData })
-          });
-
-          await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: updateData })
-          });
-
-          console.log('Row updated with new geolocation data.');
-        } catch (error) {
-          console.error('Error updating row:', error);
-        }
-
-        return;
-      }
-
-      let visitorInfo = {
+      const visitorInfo = {
         ip_address: ip,
         ip_city: ipCity,
         ip_region: ipRegion,
@@ -148,25 +112,79 @@
         is_mobile: isMobile ? 'Yes' : 'No'
       };
 
-      console.log('Data to be sent to SheetDB:', visitorInfo);
-
-      try {
-        let response = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(visitorInfo)
+      // First Sheet - main
+      let existingData = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn')
+        .then(res => res.json())
+        .catch(err => {
+          console.error('Error fetching main sheet:', err);
+          return [];
         });
 
-        let responseData = await response.json();
-        console.log('Response from SheetDB:', responseData);
-      } catch (error) {
-        console.error('Error submitting data:', error);
+      let existingEntry = existingData.find(entry => entry.ip_address === ip);
+      if (existingEntry) {
+        console.log('IP found, updating row with new geolocation data.');
+        try {
+          await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/${existingEntry.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updateData)
+          });
+          console.log('Row updated with new geolocation data.');
+        } catch (error) {
+          console.error('Error updating main sheet:', error);
+        }
+      } else {
+        try {
+          await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(visitorInfo)
+          });
+          console.log('New row added to main sheet.');
+        } catch (error) {
+          console.error('Error adding to main sheet:', error);
+        }
+      }
+
+      // Second Sheet - backup/parallel
+      let secondSheetData = await fetch('https://sheetdb.io/api/v1/sn2qfqeidyhhl')
+        .then(res => res.json())
+        .catch(err => {
+          console.error('Error fetching second sheet:', err);
+          return [];
+        });
+
+      let ipExistsInSecond = secondSheetData.some(entry => entry.ip_address === ip);
+      if (ipExistsInSecond) {
+        try {
+          await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: updateData })
+          });
+          console.log('Row updated in second sheet.');
+        } catch (error) {
+          console.error('Error updating second sheet row:', error);
+        }
+      } else {
+        try {
+          await fetch('https://sheetdb.io/api/v1/sn2qfqeidyhhl', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: visitorInfo })
+          });
+          console.log('New row added to second sheet.');
+        } catch (error) {
+          console.error('Error adding to second sheet:', error);
+        }
       }
     }
 
+    // Start tracking
     collectData();
   </script>
 </section>
+
 
 
       <!-- course -->
