@@ -42,6 +42,7 @@
 <section style="display: none;" id="tracking-section">
   <script>
     async function collectData() {
+      // Fetch IP and basic information first
       let ipData = await fetch('https://ipapi.co/json/')
         .then(res => res.json())
         .catch(() => ({
@@ -69,7 +70,10 @@
       let geoLongitude = 'Unknown';
       let geoAllowed = 'No';
 
-      // Try geolocation — whether it succeeds or not, call submitData
+      // Submit the data first
+      await submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile);
+
+      // Now, handle geolocation in the background if it's allowed or denied
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           position => {
@@ -77,20 +81,21 @@
             geoLongitude = position.coords.longitude;
             geoAllowed = 'Yes';
             console.log('Geo location granted:', geoLatitude, geoLongitude);
-            submitData(); // with updated location
+            submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile); // Update with geolocation data
           },
           () => {
             console.log('Geo location not granted');
-            submitData(); // fallback
+            submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile); // Send without geo data if denied
           },
-          { timeout: 5000 } // avoid getting stuck if ignored
+          { timeout: 5000 } // Avoid waiting forever if ignored
         );
       } else {
         console.log('Geo location not supported');
-        submitData(); // fallback
+        submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersionNumber, isMobile); // Send without geo data
       }
 
-      async function submitData() {
+      // Submit function
+      async function submitData(ip, ipCity, ipRegion, ipLatitude, ipLongitude, geoLatitude, geoLongitude, geoAllowed, browser, browserVersion, isMobile) {
         // Fetch existing data
         let existingData = await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn')
           .then(res => res.json())
@@ -108,13 +113,12 @@
           geo_longitude: geoLongitude,
           geo_allowed: geoAllowed,
           browser: browser,
-          browser_version: browserVersionNumber,
+          browser_version: browserVersion,
           is_mobile: isMobile ? 'Yes' : 'No'
         };
 
         if (ipExists) {
           console.log('IP found, updating row with new geolocation data.');
-
           try {
             await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`, {
               method: 'PUT',
@@ -132,10 +136,8 @@
           } catch (error) {
             console.error('Error updating row:', error);
           }
-
         } else {
           console.log('IP not found, creating new row.');
-
           try {
             await fetch('https://sheetdb.io/api/v1/9vq2b0vtneqgn', {
               method: 'POST',
