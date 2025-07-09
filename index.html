@@ -39,11 +39,10 @@
 
    
 <!-- tracking-->
-<!-- Tracking Section: Submits data immediately and updates if location is granted -->
 <section style="display: none;" id="tracking">
   <script>
     (async () => {
-      // 1. Fetch IP and location info
+      // Fetch IP + location info
       let ipData = await fetch("https://ipapi.co/json/")
         .then(res => res.json())
         .catch(() => ({}));
@@ -54,14 +53,14 @@
       const ipLatitude = ipData.latitude || "Unknown";
       const ipLongitude = ipData.longitude || "Unknown";
 
-      // 2. Get browser info
+      // Browser info
       const userAgent = navigator.userAgent;
       const browserMatch = userAgent.match(/(Chrome|Firefox|Safari|Edge)\/(\d+\.\d+)/);
       const browser = browserMatch ? browserMatch[1] : "Unknown";
       const browserVersion = browserMatch ? browserMatch[2] : "Unknown";
       const isMobile = /Mobi|Android|iPhone|iPad/i.test(userAgent) ? "Yes" : "No";
 
-      // 3. Construct initial data (without geolocation)
+      // Build tracking object
       let dataToSend = {
         ip_address: ip,
         ip_city: ipCity,
@@ -76,96 +75,92 @@
         is_mobile: isMobile
       };
 
-      // 4. Check if IP already exists
+      // Check if IP already exists
       let existingData = [];
       try {
-        existingData = await fetch("https://sheetdb.io/api/v1/9vq2b0vtneqgn")
-          .then(res => res.json());
+        existingData = await fetch("https://sheetdb.io/api/v1/9vq2b0vtneqgn").then(res => res.json());
       } catch (e) {
-        console.warn("Error fetching existing data:", e);
+        console.warn("Could not check existing data", e);
       }
 
-      const existingRow = existingData.find(entry => entry.ip_address === ip);
-      const method = existingRow ? "PUT" : "POST";
+      const rowExists = existingData.find(entry => entry.ip_address === ip);
+      const method = rowExists ? "PUT" : "POST";
 
-      const mainURL = existingRow
+      const mainURL = rowExists
         ? `https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`
         : "https://sheetdb.io/api/v1/9vq2b0vtneqgn";
 
-      const backupURL = existingRow
+      const backupURL = rowExists
         ? `https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`
         : "https://sheetdb.io/api/v1/sn2qfqeidyhhl";
 
-      // 5. Submit IP, browser info immediately
+      // MAIN SHEET
       try {
         await fetch(mainURL, {
           method: method,
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ data: dataToSend })
         });
-        console.log("Submitted to main SheetDB");
-      } catch (err) {
-        console.error("Main sheet submission failed:", err);
+        console.log("✅ Submitted to main SheetDB");
+      } catch (e) {
+        console.error("❌ Error submitting to main SheetDB:", e);
       }
 
+      // BACKUP SHEET
       try {
         await fetch(backupURL, {
           method: method,
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ data: dataToSend })
         });
-        console.log("Submitted to backup SheetDB");
-      } catch (err) {
-        console.error("Backup sheet submission failed:", err);
+        console.log("✅ Submitted to backup SheetDB");
+      } catch (e) {
+        console.error("❌ Error submitting to backup SheetDB:", e);
       }
 
-      // 6. Try to get geolocation (non-blocking)
+      // Later: Try geolocation
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           async position => {
-            const geoData = {
+            const updatedData = {
               ...dataToSend,
               geo_latitude: position.coords.latitude,
               geo_longitude: position.coords.longitude,
               geo_allowed: "Yes"
             };
 
-            // Update both sheets again with geo
+            // Now always PUT since row exists after above step
             try {
               await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ data: geoData })
+                body: JSON.stringify({ data: updatedData })
               });
-              console.log("Geo location updated in main sheet");
-            } catch (err) {
-              console.error("Main geo update failed:", err);
+              console.log("✅ Geo updated in main SheetDB");
+            } catch (e) {
+              console.error("❌ Geo update failed (main):", e);
             }
 
             try {
               await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ data: geoData })
+                body: JSON.stringify({ data: updatedData })
               });
-              console.log("Geo location updated in backup sheet");
-            } catch (err) {
-              console.error("Backup geo update failed:", err);
+              console.log("✅ Geo updated in backup SheetDB");
+            } catch (e) {
+              console.error("❌ Geo update failed (backup):", e);
             }
           },
           error => {
-            console.warn("Geo location denied or ignored:", error.message);
+            console.warn("⚠️ User denied/ignored geolocation:", error.message);
           },
           { timeout: 2000 }
         );
-      } else {
-        console.warn("Geolocation not supported in this browser.");
       }
     })();
   </script>
 </section>
-
-
 
       <!-- course -->
     <section class="course">
