@@ -3,5 +3,5 @@ function showMenu(){
     navLinks.style.top = '0';
 }
 function hideMenu(){
-    navLinks.style.top = '-800px'
+    navLinks.style.top = '-8000px'
 }
