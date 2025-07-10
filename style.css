@@ -13,6 +13,10 @@
 .cta {
     color: white; /* Makes all text white */
 }
+.fa-bars {
+    font-size: 40px; /* Adjust size as needed */
+    color: #fff; /* Sets color to white */
+}
 .icons {
   border: 4px solid #007BFF; /* Blue border */
   border-radius: 10px; /* Rounded corners */
