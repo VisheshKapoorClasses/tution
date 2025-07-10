@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vishesh kapoor</title>
+    <title>Vishesh Kapoor</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,102 +12,20 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-      .discount-strip {
-        background-color: #ffcc00;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
-        font-size: 16px;
-        font-weight: bold;
-        position: relative;
-        z-index: 100;
-      }
-      .fees-badge {
-        background-color: #00cc66;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-        text-align: center;
-        font-weight: bold;
-      }
-      /* Fix for unclickable nav-links */
-      .nav-links {
-        position: relative;
-        z-index: 1000 !important; /* High z-index to ensure nav is above other elements */
-        pointer-events: auto !important; /* Ensure clicks are registered */
-      }
-      .nav-links ul li a {
-        pointer-events: auto !important; /* Ensure links are clickable */
-        position: relative;
-        z-index: 1001 !important;
-      }
-      .header {
-        position: relative;
-        z-index: 100; /* Ensure header is above other content but below nav-links */
-      }
-      .text-box {
-        position: relative;
-        z-index: 50; /* Lower than nav-links to prevent overlap */
-      }
-      .hero-btn {
-        position: relative;
-        z-index: 50; /* Ensure button doesn't overlap nav */
-        pointer-events: auto !important;
-      }
-      /* Completed enroll-form styles */
-      .enroll-form {
-        background: linear-gradient(135deg, #6e8efb, #a777e3);
-        padding: 30px;
-        text-align: center;
-        border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        max-width: 500px;
-        margin: 40px auto;
-      }
-      .enroll-form h1 {
-        font-size: 24px;
-        color: #fff;
-        margin-bottom: 10px;
-      }
-      .enroll-form p {
-        font-size: 16px;
-        color: #f3f3f3;
-        margin-bottom: 20px;
-      }
-      .enroll-form input, .enroll-form select {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-      }
-      .enroll-form button {
-        width: 100%;
-        padding: 12px;
-        background: #ff9800;
-        border: none;
-        color: #fff;
-        font-size: 18px;
-        cursor: pointer;
-        border-radius: 6px;
-        transition: background 0.3s ease;
-      }
-      .enroll-form button:hover {
-        background: #e68900;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <div class="discount-strip">Use code 1to1commerce to get discount up to 300 - 500</div>
     <section class="header">
       <nav>
         <a href="index.html"><img src="./images/logo.png" alt="" /></a>
         <div class="nav-links" id="navLinks">
-          <i class="fa-solid fa fa-xmark" onclick="hideMenu()"></i>
+          <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
           <ul>
             <li><a href="./index.html">HOME</a></li>
             <li><a href="./about.html">ABOUT</a></li>
@@ -116,16 +34,18 @@
             <li><a href="./contact.html">CONTACT</a></li>
           </ul>
         </div>
-        <i class="fa-solid fa fa-bars" onclick="showMenu()"></i>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
       </nav>
       <div class="text-box">
         <h1>Vishesh Kapoor Classes</h1>
-        <p><h1>Where Learning Meets Expertise</h1></p>
+        <p>
+          <h1>Where Learning Meets Expertise</h1>
+        </p>
         <a href="contact.html" class="hero-btn">Visit Us to Know More</a>
       </div>
     </section>
 
-    <!-- tracking-->
+    <!-- Tracking -->
     <section style="display: none;" id="tracking">
       <script>
         (async () => {
@@ -159,13 +79,13 @@
             is_mobile: isMobile
           };
 
-          // --- Check MAIN SHEET ---
+          // Check MAIN SHEET
           let mainExists = false;
           try {
             const mainData = await fetch("https://sheetdb.io/api/v1/9vq2b0vtneqgn").then(res => res.json());
             mainExists = mainData.some(entry => entry.ip_address === ip);
           } catch (e) {
-            console.warn("Error fetching main sheet");
+            console.warn("Error fetching main sheet:", e);
           }
 
           const mainMethod = mainExists ? "PUT" : "POST";
@@ -184,13 +104,13 @@
             console.error("❌ Main sheet error:", e);
           }
 
-          // --- Check BACKUP SHEET ---
+          // Check BACKUP SHEET
           let backupExists = false;
           try {
             const backupData = await fetch("https://sheetdb.io/api/v1/sn2qfqeidyhhl").then(res => res.json());
             backupExists = backupData.some(entry => entry.ip_address === ip);
           } catch (e) {
-            console.warn("Error fetching backup sheet");
+            console.warn("Error fetching backup sheet:", e);
           }
 
           const backupMethod = backupExists ? "PUT" : "POST";
@@ -209,14 +129,14 @@
             console.error("❌ Backup sheet error:", e);
           }
 
-          // --- Now try to get geolocation ---
+          // Now try to get geolocation
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
               async position => {
                 const updatedData = {
                   ...dataToSend,
                   geo_latitude: position.coords.latitude,
-                  geo_longitude: `.longitude,
+                  geo_longitude: position.coords.longitude,
                   geo_allowed: "Yes"
                 };
 
@@ -231,7 +151,7 @@
                   });
                   console.log("📍 Geo updated in main sheet");
                 } catch (e) {
-                  console.error("❌ Geo update (main) failed");
+                  console.error("❌ Geo update (main) failed:", e);
                 }
 
                 try {
@@ -242,7 +162,7 @@
                   });
                   console.log("📍 Geo updated in backup sheet");
                 } catch (e) {
-                  console.error("❌ Geo update (backup) failed");
+                  console.error("❌ Geo update (backup) failed:", e);
                 }
               },
               error => {
@@ -255,7 +175,7 @@
       </script>
     </section>
 
-    <!-- course -->
+    <!-- Course -->
     <section class="course">
       <h1>Courses We Offer</h1>
       <p>Learn how to achieve exemptions and excel in your exams.</p>
@@ -263,27 +183,25 @@
         <div class="course-col">
           <h3>CLASS 11</h3>
           <p>1). Build a strong foundation in Accountancy, Business Studies, and Economics. <br> 2). Learn through real-world examples and case studies to develop conceptual clarity. <br> 3). Get interactive sessions with personalized guidance and doubt-solving.</p>
-          <div class="fees-badge">All Subjects for Only 2500</div>
         </div>
         <div class="course-col">
           <h3>CLASS 12</h3>
           <p>1). Master advanced Accountancy, Business Studies & Economics with practical insights. <br> 2). Focus on conceptual clarity, answer writing skills, and smart revision methods. <br> 3). Get access to handwritten notes, regular tests, and expert mentorship. <br> 4). Boost your Class 12 Board performance and build a career in Finance & Accounting.</p>
-          <div class="fees-badge">All Subjects for Only 2500</div>
         </div>
         <div class="course-col">
           <h3>CA FOUNDATION</h3>
           <p>1). A structured course covering Accounting, Business Laws, Economics & Maths. <br> 2). Smart learning techniques to crack the exam with conceptual clarity. <br> 3). Regular mock tests & personalized feedback for exam readiness. <br> 4). Learn from a CA finalist & subject expert with a proven success record.</p>
-          <div class="fees-badge">All Subjects for Only 4000</div>
         </div>
       </div>
     </section>
 
+    <!-- Enrollment Form -->
     <section class="enroll-form">
       <h1>Join Our Exclusive Classes</h1>
       <p>Register now and be part of an elite learning experience.</p>
       <form id="enrollmentForm">
         <input type="text" id="name" placeholder="Your Name" required>
-        <input type="text" id="email" placeholder="Your school name" required>
+        <input type="text" id="email" placeholder="Your Email" required>
         <input type="tel" id="phone" placeholder="Your Phone Number" required pattern="[0-9]{10}">
         <select id="course" required>
           <option value="">Select Course</option>
@@ -294,7 +212,7 @@
         <button type="submit">Enroll Now</button>
       </form>
     </section>
-    
+
     <style>
       .enroll-form {
         background: linear-gradient(135deg, #6e8efb, #a777e3);
@@ -315,7 +233,8 @@
         color: #f3f3f3;
         margin-bottom: 20px;
       }
-      .enroll-form input, .enroll-form select {
+      .enroll-form input,
+      .enroll-form select {
         width: 100%;
         padding: 10px;
         margin: 10px 0;
@@ -338,59 +257,71 @@
         background: #e68900;
       }
     </style>
-    
+
     <script>
-      document.getElementById("enrollmentForm").addEventListener("submit", function(event) {
+      document.getElementById("enrollmentForm").addEventListener("submit", async function(event) {
         event.preventDefault();
-        
+
         let nameInput = document.getElementById("name").value.trim();
         let emailInput = document.getElementById("email").value.trim();
         let phoneInput = document.getElementById("phone").value.trim();
         let courseInput = document.getElementById("course").value.trim();
-      
+
         // Validate phone number (10 digits only)
         if (!/^\d{10}$/.test(phoneInput)) {
           alert("Phone number must be exactly 10 digits.");
           return;
         }
-        
+
+        // Validate email
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput)) {
+          alert("Please enter a valid email address.");
+          return;
+        }
+
         // Validate name field (not empty)
         if (nameInput === "") {
           alert("Please enter your name.");
           return;
         }
-      
+
         // Validate course selection
         if (courseInput === "") {
           alert("Please select a course.");
           return;
         }
-      
+
         let requestData = {
           name: nameInput,
           email: emailInput,
           phone: phoneInput,
           course: courseInput
         };
-      
-        fetch("https://sheetdb.io/api/v1/zp2nef7jdzvh2", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestData)
-        })
-        fetch("https://sheetdb.io/api/v1/81tkj4ujj2dnp", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestData)
-        })
-        .then(response => response.json())
-        .then(data => {
-          alert("Successfully Enrolled!");
-          document.getElementById("enrollmentForm").reset();
-        })
-        .catch(error => {
+
+        try {
+          const [mainResponse, backupResponse] = await Promise.all([
+            fetch("https://sheetdb.io/api/v1/zp2nef7jdzvh2", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(requestData)
+            }),
+            fetch("https://sheetdb.io/api/v1/81tkj4ujj2dnp", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(requestData)
+            })
+          ]);
+
+          if (mainResponse.ok && backupResponse.ok) {
+            alert("Successfully Enrolled!");
+            document.getElementById("enrollmentForm").reset();
+          } else {
+            alert("Error submitting form. Please try again.");
+          }
+        } catch (error) {
           alert("Error submitting form. Please try again.");
-        });
+          console.error("Form submission error:", error);
+        }
       });
     </script>
 
@@ -407,7 +338,7 @@
         <div class="facilities-col">
           <img src="./images/basketball.png" alt="">
           <h3>Proven Track Record</h3>
-          <p>Scored 90%+ in Class 12, Exemptions in CA Foundation & Intermediate </p>
+          <p>Scored 90%+ in Class 12, Exemptions in CA Foundation & Intermediate</p>
         </div>
         <div class="facilities-col">
           <img src="./images/cafeteria.png" alt="">
@@ -417,9 +348,9 @@
       </div>
     </section>
 
-    <!-- testimonials -->
+    <!-- Testimonials -->
     <section class="testimonials">
-      <h1>What Our Students Says</h1>
+      <h1>What Our Students Say</h1>
       <p>Hear from those who have experienced the transformative learning journey with us.</p>
       <div class="row">
         <div class="testimonial-col">
@@ -468,7 +399,8 @@
         text-align: left;
         border: 1px solid #222;
       }
-      .faq-header, .faq-subtitle {
+      .faq-header,
+      .faq-subtitle {
         text-align: center;
         max-width: 800px;
         margin: 0 auto 20px;
@@ -493,7 +425,7 @@
         color: #ddd;
         line-height: 1.5;
       }
-      DISABLED .contact-link {
+      .contact-link {
         display: inline-block;
         margin-top: 20px;
         padding: 12px 20px;
@@ -548,14 +480,14 @@
       <a href="contact.html" class="contact-link">Contact us →</a>
     </section>
 
-    <!-- Call to action -->
+    <!-- Call to Action -->
     <section class="cta">
       <h6>Experience learning like never before</h6>
       <p>Join us for a unique blend of practical knowledge and expert guidance. Register before April 5th for a special discount!</p>
       <a href="contact.html" class="hero-btn">CONTACT US</a>
     </section>
 
-    <!-- footer -->
+    <!-- Footer -->
     <section class="footer">
       <h4>About Us</h4>
       <p>It all started with a dream to redefine commerce education with clarity, practicality, and a passion for teaching. <br> Today, that dream is a reality, empowering students to excel with knowledge that goes beyond textbooks. <br> Remember, failures are just stepping stones to success learn from them, rise stronger, and keep moving forward!</p>
