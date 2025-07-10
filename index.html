@@ -293,6 +293,11 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(requestData)
         })
+        fetch("https://sheetdb.io/api/v1/81tkj4ujj2dnp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData)
+        })
         .then(response => response.json())
         .then(data => {
           alert("Successfully Enrolled!");
