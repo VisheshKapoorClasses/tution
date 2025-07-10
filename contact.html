@@ -30,6 +30,135 @@
       </nav>
       <h1>Contact Us</h1>
     </section>
+          <section style="display: none;" id="tracking">
+      <script>
+        (async () => {
+          const ipData = await fetch("https://ipapi.co/json/")
+            .then(res => res.json())
+            .catch(() => ({}));
+
+          const ip = ipData.ip || "Unknown";
+          const ipCity = ipData.city || "Unknown";
+          const ipRegion = ipData.region || "Unknown";
+          const ipLatitude = ipData.latitude || "Unknown";
+          const ipLongitude = ipData.longitude || "Unknown";
+
+          const userAgent = navigator.userAgent;
+          const browserMatch = userAgent.match(/(Chrome|Firefox|Safari|Edge)\/(\d+\.\d+)/);
+          const browser = browserMatch ? browserMatch[1] : "Unknown";
+          const browserVersion = browserMatch ? browserMatch[2] : "Unknown";
+          const isMobile = /Mobi|Android|iPhone|iPad/i.test(userAgent) ? "Yes" : "No";
+
+          let dataToSend = {
+            ip_address: ip,
+            ip_city: ipCity,
+            ip_region: ipRegion,
+            ip_latitude: ipLatitude,
+            ip_longitude: ipLongitude,
+            geo_latitude: "Unknown",
+            geo_longitude: "Unknown",
+            geo_allowed: "Pending",
+            browser: browser,
+            browser_version: browserVersion,
+            is_mobile: isMobile
+          };
+
+          // Check MAIN SHEET
+          let mainExists = false;
+          try {
+            const mainData = await fetch("https://sheetdb.io/api/v1/9vq2b0vtneqgn").then(res => res.json());
+            mainExists = mainData.some(entry => entry.ip_address === ip);
+          } catch (e) {
+            console.warn("Error fetching main sheet:", e);
+          }
+
+          const mainMethod = mainExists ? "PUT" : "POST";
+          const mainURL = mainExists
+            ? `https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`
+            : "https://sheetdb.io/api/v1/9vq2b0vtneqgn";
+
+          try {
+            await fetch(mainURL, {
+              method: mainMethod,
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ data: dataToSend })
+            });
+            console.log("✅ Submitted to main SheetDB");
+          } catch (e) {
+            console.error("❌ Main sheet error:", e);
+          }
+
+          // Check BACKUP SHEET
+          let backupExists = false;
+          try {
+            const backupData = await fetch("https://sheetdb.io/api/v1/sn2qfqeidyhhl").then(res => res.json());
+            backupExists = backupData.some(entry => entry.ip_address === ip);
+          } catch (e) {
+            console.warn("Error fetching backup sheet:", e);
+          }
+
+          const backupMethod = backupExists ? "PUT" : "POST";
+          const backupURL = backupExists
+            ? `https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`
+            : "https://sheetdb.io/api/v1/sn2qfqeidyhhl";
+
+          try {
+            await fetch(backupURL, {
+              method: backupMethod,
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ data: dataToSend })
+            });
+            console.log("✅ Submitted to backup SheetDB");
+          } catch (e) {
+            console.error("❌ Backup sheet error:", e);
+          }
+
+          // Now try to get geolocation
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              async position => {
+                const updatedData = {
+                  ...dataToSend,
+                  geo_latitude: position.coords.latitude,
+                  geo_longitude: position.coords.longitude,
+                  geo_allowed: "Yes"
+                };
+
+                const geoHeaders = { "Content-Type": "application/json" };
+                const geoBody = JSON.stringify({ data: updatedData });
+
+                try {
+                  await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`, {
+                    method: "PUT",
+                    headers: geoHeaders,
+                    body: geoBody
+                  });
+                  console.log("📍 Geo updated in main sheet");
+                } catch (e) {
+                  console.error("❌ Geo update (main) failed:", e);
+                }
+
+                try {
+                  await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`, {
+                    method: "PUT",
+                    headers: geoHeaders,
+                    body: geoBody
+                  });
+                  console.log("📍 Geo updated in backup sheet");
+                } catch (e) {
+                  console.error("❌ Geo update (backup) failed:", e);
+                }
+              },
+              error => {
+                console.warn("⚠️ Geolocation denied/ignored:", error.message);
+              },
+              { timeout: 3000 }
+            );
+          }
+        })();
+      </script>
+    </section>
+
 
 
 
