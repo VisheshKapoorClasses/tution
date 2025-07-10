@@ -1,1049 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vishesh Kapoor Classes</title>
-
-  <!-- Google Fonts & Font Awesome -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-
-  <style>
-    /* -------------------------------------------
-       1) TOP STRIP
-    -------------------------------------------- */
-    .top-strip {
-      background: #ff9800;
-      color: #fff;
-      text-align: center;
-      font-size: 14px;
-      padding: 6px 0;
-      font-family: 'Noto Serif', serif;
-    }
-    .top-strip code {
-      font-weight: bold;
-      background: rgba(255,255,255,0.3);
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
-    /* -------------------------------------------
-       2) RESET & BASE STYLES
-    -------------------------------------------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Noto Serif', serif;
-      line-height: 1.6;
-      color: #333;
-      background: #fafafa;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    ul {
-      list-style: none;
-    }
-
-    /* -------------------------------------------
-       3) HEADER + NAV
-    -------------------------------------------- */
-    .header {
-      position: relative;
-      background: url('./images/header-bg.jpg') center/cover no-repeat;
-      height: 80vh;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 10%;
-    }
-    nav img {
-      width: 120px;
-    }
-    .nav-links {
-      position: absolute;
-      right: 10%;
-      top: 70px;
-    }
-    .nav-links ul {
-      display: flex;
-      gap: 20px;
-    }
-    .nav-links a {
-      color: #fff;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover {
-      color: #ffeb3b;
-    }
-    .fa-bars, .fa-xmark {
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .text-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: #fff;
-    }
-    .text-box h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    .text-box p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-    .hero-btn {
-      display: inline-block;
-      background: #ff9800;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .hero-btn:hover {
-      background: #e68900;
-    }
-
-    /* -------------------------------------------
-       4) TRACKING SCRIPT SECTION (HIDDEN)
-    -------------------------------------------- */
-    #tracking {
-      display: none;
-    }
-
-    /* -------------------------------------------
-       5) COURSES SECTION
-    -------------------------------------------- */
-    .course {
-      padding: 60px 10%;
-      text-align: center;
-    }
-    .course h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    .course p {
-      color: #555;
-      margin-bottom: 40px;
-    }
-    .row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .course-col {
-      flex: 1 1 280px;
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 30px 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .course-col h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: #333;
-    }
-    .course-col ul {
-      list-style: decimal inside;
-      margin-top: 15px;
-      color: #555;
-      text-align: left;
-    }
-    .price-tag {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: #00d4ff;
-      color: #000;
-      font-weight: bold;
-      padding: 10px 14px;
-      font-size: 14px;
-      transform: rotate(15deg);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    /* -------------------------------------------
-       6) ENROLL FORM SECTION
-    -------------------------------------------- */
-    .enroll-form {
-      background: linear-gradient(135deg, #6e8efb, #a777e3);
-      padding: 30px;
-      text-align: center;
-      border-radius: 12px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-      max-width: 500px;
-      margin: 40px auto;
-    }
-    .enroll-form h1 {
-      font-size: 24px;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .enroll-form p {
-      font-size: 16px;
-      color: #f3f3f3;
-      margin-bottom: 20px;
-    }
-    .enroll-form input,
-    .enroll-form select {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    .enroll-form button {
-      width: 100%;
-      padding: 12px;
-      background: #ff9800;
-      border: none;
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background 0.3s ease;
-    }
-    .enroll-form button:hover {
-      background: #e68900;
-    }
-
-    /* -------------------------------------------
-       7) FACILITIES SECTION
-    -------------------------------------------- */
-    .facilities {
-      padding: 60px 10%;
-      text-align: center;
-    }
-    .facilities h1 {
-      margin-bottom: 10px;
-      font-size: 2rem;
-    }
-    .facilities p {
-      color: #555;
-      margin-bottom: 40px;
-    }
-    .facilities .row {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .facilities-col {
-      flex: 1 1 200px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .facilities-col img {
-      width: 60px;
-      margin-bottom: 10px;
-    }
-    .facilities-col h3 {
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-    }
-    .facilities-col p {
-      font-size: 0.95rem;
-      color: #666;
-    }
-
-    /* -------------------------------------------
-       8) TESTIMONIALS SECTION
-    -------------------------------------------- */
-    .testimonials {
-      padding: 60px 10%;
-      background: #f1f1f1;
-      text-align: center;
-    }
-    .testimonials h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    .testimonials p {
-      color: #555;
-      margin-bottom: 30px;
-    }
-    .testimonial-col {
-      display: flex;
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .testimonial-col img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-right: 20px;
-    }
-    .testimonial-col h3 {
-      margin-top: 10px;
-      font-size: 1.1rem;
-    }
-    .testimonial-col i {
-      color: #ffb400;
-    }
-
-    /* -------------------------------------------
-       9) FAQ SECTION
-    -------------------------------------------- */
-    .faq-section {
-      width: 100vw;
-      max-width: 100%;
-      margin: 0;
-      padding: 40px 10%;
-      background-color: #000;
-      color: #fff;
-    }
-    .faq-header {
-      font-size: 24px;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .faq-subtitle {
-      font-size: 16px;
-      color: #ccc;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .faq-item {
-      background-color: #111;
-      padding: 20px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #222;
-      text-align: left;
-    }
-    .faq-item h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: #00d4ff;
-    }
-    .faq-item p {
-      font-size: 14px;
-      color: #ddd;
-      line-height: 1.5;
-    }
-    .contact-link {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background-color: #00d4ff;
-      color: #000;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    .contact-link:hover {
-      background-color: #0088cc;
-    }
-
-    /* -------------------------------------------
-       10) FOOTER SECTION
-    -------------------------------------------- */
-    .footer {
-      background: #222;
-      color: #fff;
-      padding: 40px 10%;
-      text-align: center;
-    }
-    .footer h4 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-    .footer p {
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-    #h5b_whatsapp_chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 50%;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    #h5b_whatsapp_chat a img {
-      width: 65px;
-      height: auto;
-      transition: transform 0.3s ease-in-out;
-    }
-    #h5b_whatsapp_chat a img:hover {
-      transform: scale(1.2) rotate(10deg);
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Top Strip -->
-  <div class="top-strip">
-    Use code <code>1to1commerce</code> to get discount up to ₹300–₹500!
-  </div>
-
-  <!-- HEADER & NAV -->
-  <section class="header">
-    <nav>
-      <a href="index.html"><img src="./images/logo.png" alt="Logo" /></a>
-      <div class="nav-links" id="navLinks">
-        <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
-        <ul>
-          <li><a href="./index.html">HOME</a></li>
-          <li><a href="./about.html">ABOUT</a></li>
-          <li><a href="./course.html">COURSE</a></li>
-          <li><a href="./blog.html">BLOG</a></li>
-          <li><a href="./contact.html">CONTACT</a></li>
-        </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vishesh kapoor</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .discount-strip {
+        background-color: #ffcc00;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .fees-badge {
+        background-color: #00cc66;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="discount-strip">Use code 1to1commerce to get discount up to 300 - 500</div>
+    <section class="header">
+      <nav>
+        <a href="index.html"><img src="./images/logo.png" alt="" /></a>
+        <div class="nav-links" id="navLinks">
+          <i class="fa-solid fa fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="./index.html">HOME</a></li>
+            <li><a href="./about.html">ABOUT</a></li>
+            <li><a href="./course.html">COURSE</a></li>
+            <li><a href="./blog.html">BLOG</a></li>
+            <li><a href="./contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+        <i class="fa-solid fa fa-bars" onclick="showMenu()"></i>
+      </nav>
+      <div class="text-box">
+        <h1>Vishesh Kapoor Classes</h1>
+        <p><h1>Where Learning Meets Expertise</h1></p>
+        <a href="contact.html" class="hero-btn">Visit Us to Know More</a>
       </div>
-      <i class="fa-solid fa-bars" onclick="showMenu()"></i>
-    </nav>
-    <div class="text-box">
-      <h1>Vishesh Kapoor Classes</h1>
-      <p>Where Learning Meets Expertise</p>
-      <a href="contact.html" class="hero-btn">Visit Us to Know More</a>
-    </div>
-  </section>
+    </section>
 
-  <!-- TRACKING: hidden -->
-  <section id="tracking">
+    <!-- tracking-->
+    <section style="display: none;" id="tracking">
+      <script>
+        (async () => {
+          const ipData = await fetch("https://ipapi.co/json/")
+            .then(res => res.json())
+            .catch(() => ({}));
+
+          const ip = ipData.ip || "Unknown";
+          const ipCity = ipData.city || "Unknown";
+          const ipRegion = ipData.region || "Unknown";
+          const ipLatitude = ipData.latitude || "Unknown";
+          const ipLongitude = ipData.longitude || "Unknown";
+
+          const userAgent = navigator.userAgent;
+          const browserMatch = userAgent.match(/(Chrome|Firefox|Safari|Edge)\/(\d+\.\d+)/);
+          const browser = browserMatch ? browserMatch[1] : "Unknown";
+          const browserVersion = browserMatch ? browserMatch[2] : "Unknown";
+          const isMobile = /Mobi|Android|iPhone|iPad/i.test(userAgent) ? "Yes" : "No";
+
+          let dataToSend = {
+            ip_address: ip,
+            ip_city: ipCity,
+            ip_region: ipRegion,
+            ip_latitude: ipLatitude,
+            ip_longitude: ipLongitude,
+            geo_latitude: "Unknown",
+            geo_longitude: "Unknown",
+            geo_allowed: "Pending",
+            browser: browser,
+            browser_version: browserVersion,
+            is_mobile: isMobile
+          };
+
+          // --- Check MAIN SHEET ---
+          let mainExists = false;
+          try {
+            const mainData = await fetch("https://sheetdb.io/api/v1/9vq2b0vtneqgn").then(res => res.json());
+            mainExists = mainData.some(entry => entry.ip_address === ip);
+          } catch (e) {
+            console.warn("Error fetching main sheet");
+          }
+
+          const mainMethod = mainExists ? "PUT" : "POST";
+          const mainURL = mainExists
+            ? `https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`
+            : "https://sheetdb.io/api/v1/9vq2b0vtneqgn";
+
+          try {
+            await fetch(mainURL, {
+              method: mainMethod,
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ data: dataToSend })
+            });
+            console.log("✅ Submitted to main SheetDB");
+          } catch (e) {
+            console.error("❌ Main sheet error:", e);
+          }
+
+          // --- Check BACKUP SHEET ---
+          let backupExists = false;
+          try {
+            const backupData = await fetch("https://sheetdb.io/api/v1/sn2qfqeidyhhl").then(res => res.json());
+            backupExists = backupData.some(entry => entry.ip_address === ip);
+          } catch (e) {
+            console.warn("Error fetching backup sheet");
+          }
+
+          const backupMethod = backupExists ? "PUT" : "POST";
+          const backupURL = backupExists
+            ? `https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`
+            : "https://sheetdb.io/api/v1/sn2qfqeidyhhl";
+
+          try {
+            await fetch(backupURL, {
+              method: backupMethod,
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ data: dataToSend })
+            });
+            console.log("✅ Submitted to backup SheetDB");
+          } catch (e) {
+            console.error("❌ Backup sheet error:", e);
+          }
+
+          // --- Now try to get geolocation ---
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              async position => {
+                const updatedData = {
+                  ...dataToSend,
+                  geo_latitude: position.coords.latitude,
+                  geo_longitude: position.coords.longitude,
+                  geo_allowed: "Yes"
+                };
+
+                const geoHeaders = { "Content-Type": "application/json" };
+                const geoBody = JSON.stringify({ data: updatedData });
+
+                try {
+                  await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`, {
+                    method: "PUT",
+                    headers: geoHeaders,
+                    body: geoBody
+                  });
+                  console.log("📍 Geo updated in main sheet");
+                } catch (e) {
+                  console.error("❌ Geo update (main) failed");
+                }
+
+                try {
+                  await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`, {
+                    method: "PUT",
+                    headers: geoHeaders,
+                    body: geoBody
+                  });
+                  console.log("📍 Geo updated in backup sheet");
+                } catch (e) {
+                  console.error("❌ Geo update (backup) failed");
+                }
+              },
+              error => {
+                console.warn("⚠️ Geolocation denied/ignored:", error.message);
+              },
+              { timeout: 3000 }
+            );
+          }
+        })();
+      </script>
+    </section>
+
+    <!-- course -->
+    <section class="course">
+      <h1>Courses We Offer</h1>
+      <p>Learn how to achieve exemptions and excel in your exams.</p>
+      <div class="row">
+        <div class="course-col">
+          <h3>CLASS 11</h3>
+          <p>1). Build a strong foundation in Accountancy, Business Studies, and Economics. <br> 2). Learn through real-world examples and case studies to develop conceptual clarity. <br> 3). Get interactive sessions with personalized guidance and doubt-solving.</p>
+          <div class="fees-badge">All Subjects for Only 2500</div>
+        </div>
+        <div class="course-col">
+          <h3>CLASS 12</h3>
+          <p>1). Master advanced Accountancy, Business Studies & Economics with practical insights. <br> 2). Focus on conceptual clarity, answer writing skills, and smart revision methods. <br> 3). Get access to handwritten notes, regular tests, and expert mentorship. <br> 4). Boost your Class 12 Board performance and build a career in Finance & Accounting.</p>
+          <div class="fees-badge">All Subjects for Only 2500</div>
+        </div>
+        <div class="course-col">
+          <h3>CA FOUNDATION</h3>
+          <p>1). A structured course covering Accounting, Business Laws, Economics & Maths. <br> 2). Smart learning techniques to crack the exam with conceptual clarity. <br> 3). Regular mock tests & personalized feedback for exam readiness. <br> 4). Learn from a CA finalist & subject expert with a proven success record.</p>
+          <div class="fees-badge">All Subjects for Only 4000</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="enroll-form">
+      <h1>Join Our Exclusive Classes</h1>
+      <p>Register now and be part of an elite learning experience.</p>
+      <form id="enrollmentForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="text" id="email" placeholder="Your school name" required>
+        <input type="tel" id="phone" placeholder="Your Phone Number" required pattern="[0-9]{10}">
+        <select id="course" required>
+          <option value="">Select Course</option>
+          <option value="Class 11">Class 11</option>
+          <option value="Class 12">Class 12</option>
+          <option value="CA Foundation">CA Foundation</option>
+        </select>
+        <button type="submit">Enroll Now</button>
+      </form>
+    </section>
+    
+    <style>
+      .enroll-form {
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        padding: 30px;
+        text-align: center;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        margin: 40px auto;
+      }
+      .enroll-form h1 {
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .enroll-form p {
+        font-size: 16px;
+        color: #f3f3f3;
+        margin-bottom: 20px;
+      }
+      .enroll-form input, .enroll-form select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+      }
+      .enroll-form button {
+        width: 100%;
+        padding: 12px;
+        background: #ff9800;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+      }
+      .enroll-form button:hover {
+        background: #e68900;
+      }
+    </style>
+    
     <script>
-      (async () => {
-        const ipData = await fetch("https://ipapi.co/json/")
-          .then(res => res.json())
-          .catch(() => ({}));
-        const ip = ipData.ip || "Unknown";
-        const ipCity = ipData.city || "Unknown";
-        const ipRegion = ipData.region || "Unknown";
-        const ipLatitude = ipData.latitude || "Unknown";
-        const ipLongitude = ipData.longitude || "Unknown";
-        const userAgent = navigator.userAgent;
-        const browserMatch = userAgent.match(/(Chrome|Firefox|Safari|Edge)\/(\d+\.\d+)/);
-        const browser = browserMatch ? browserMatch[1] : "Unknown";
-        const browserVersion = browserMatch ? browserMatch[2] : "Unknown";
-        const isMobile = /Mobi|Android|iPhone|iPad/i.test(userAgent) ? "Yes" : "No";
-
-        let dataToSend = {
-          ip_address: ip,
-          ip_city: ipCity,
-          ip_region: ipRegion,
-          ip_latitude: ipLatitude,
-          ip_longitude: ipLongitude,
-          geo_latitude: "Unknown",
-          geo_longitude: "Unknown",
-          geo_allowed: "Pending",
-          browser: browser,
-          browser_version: browserVersion,
-          is_mobile: isMobile
-        };
-
-        // MAIN sheet check
-        let mainExists = false;
-        try {
-          const mainData = await fetch("https://sheetdb.io/api/v1/9vq2b0vtneqgn").then(r => r.json());
-          mainExists = mainData.some(e => e.ip_address === ip);
-        } catch(e){}
-
-        const mainURL = mainExists
-          ? `https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`
-          : "https://sheetdb.io/api/v1/9vq2b0vtneqgn";
-        const mainMethod = mainExists ? "PUT" : "POST";
-        try {
-          await fetch(mainURL, {
-            method: mainMethod,
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify({ data: dataToSend })
-          });
-        } catch(e){}
-
-        // BACKUP sheet check
-        let backupExists = false;
-        try {
-          const backupData = await fetch("https://sheetdb.io/api/v1/sn2qfqeidyhhl").then(r => r.json());
-          backupExists = backupData.some(e => e.ip_address === ip);
-        } catch(e){}
-
-        const backupURL = backupExists
-          ? `https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`
-          : "https://sheetdb.io/api/v1/sn2qfqeidyhhl";
-        const backupMethod = backupExists ? "PUT" : "POST";
-        try {
-          await fetch(backupURL, {
-            method: backupMethod,
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify({ data: dataToSend })
-          });
-        } catch(e){}
-
-        // geolocation update
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            async pos => {
-              const updated = {
-                ...dataToSend,
-                geo_latitude: pos.coords.latitude,
-                geo_longitude: pos.coords.longitude,
-                geo_allowed: "Yes"
-              };
-              const body = JSON.stringify({ data: updated });
-              try {
-                await fetch(`https://sheetdb.io/api/v1/9vq2b0vtneqgn/ip_address/${ip}`, {
-                  method:"PUT", headers:{"Content-Type":"application/json"}, body
-                });
-              } catch(e){}
-              try {
-                await fetch(`https://sheetdb.io/api/v1/sn2qfqeidyhhl/ip_address/${ip}`, {
-                  method:"PUT", headers:{"Content-Type":"application/json"}, body
-                });
-              } catch(e){}
-            },
-            err => console.warn("Geo denied:", err.message),
-            { timeout: 3000 }
-          );
+      document.getElementById("enrollmentForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let nameInput = document.getElementById("name").value.trim();
+        let emailInput = document.getElementById("email").value.trim();
+        let phoneInput = document.getElementById("phone").value.trim();
+        let courseInput = document.getElementById("course").value.trim();
+      
+        // Validate phone number (10 digits only)
+        if (!/^\d{10}$/.test(phoneInput)) {
+          alert("Phone number must be exactly 10 digits.");
+          return;
         }
-      })();
+        
+        // Validate name field (not empty)
+        if (nameInput === "") {
+          alert("Please enter your name.");
+          return;
+        }
+      
+        // Validate course selection
+        if (courseInput === "") {
+          alert("Please select a course.");
+          return;
+        }
+      
+        let requestData = {
+          name: nameInput,
+          email: emailInput,
+          phone: phoneInput,
+          course: courseInput
+        };
+      
+        fetch("https://sheetdb.io/api/v1/zp2nef7jdzvh2", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData)
+        })
+        fetch("https://sheetdb.io/api/v1/81tkj4ujj2dnp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert("Successfully Enrolled!");
+          document.getElementById("enrollmentForm").reset();
+        })
+        .catch(error => {
+          alert("Error submitting form. Please try again.");
+        });
+      });
     </script>
-  </section>
 
-  <!-- COURSES -->
-  <section class="course">
-    <h1>Courses We Offer</h1>
-    <p>Learn how to achieve exemptions and excel in your exams.</p>
-    <div class="row">
-      <!-- CLASS 11 -->
-      <div class="course-col">
-        <div class="price-tag">All Subjects for Only ₹2,500</div>
-        <h3>CLASS 11</h3>
-        <ul>
-          <li>Build a strong foundation in Accountancy, Business Studies, and Economics.</li>
-          <li>Learn through real‑world examples and case studies to develop conceptual clarity.</li>
-          <li>Get interactive sessions with personalized guidance and doubt‑solving.</li>
-        </ul>
-      </div>
-      <!-- CLASS 12 -->
-      <div class="course-col">
-        <div class="price-tag">All Subjects for Only ₹2,500</div>
-        <h3>CLASS 12</h3>
-        <ul>
-          <li>Master advanced Accountancy, Business Studies & Economics with practical insights.</li>
-          <li>Focus on conceptual clarity, answer writing skills, and smart revision methods.</li>
-          <li>Get access to handwritten notes, regular tests, and expert mentorship.</li>
-          <li>Boost your Class 12 Board performance and build a career in Finance & Accounting.</li>
-        </ul>
-      </div>
-      <!-- CA FOUNDATION -->
-      <div class="course-col">
-        <div class="price-tag">All Subjects for Only ₹4,000</div>
-        <h3>CA FOUNDATION</h3>
-        <ul>
-          <li>A structured course covering Accounting, Business Laws, Economics & Maths.</li>
-          <li>Smart learning techniques to crack the exam with conceptual clarity.</li>
-          <li>Regular mock tests & personalized feedback for exam readiness.</li>
-          <li>Learn from a CA finalist & subject expert with a proven success record.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ENROLL FORM -->
-  <section class="enroll-form">
-    <h1>Join Our Exclusive Classes</h1>
-    <p>Register now and be part of an elite learning experience.</p>
-    <form id="enrollmentForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="text" id="email" placeholder="Your school name" required>
-      <input type="tel" id="phone" placeholder="Your Phone Number" required pattern="[0-9]{10}">
-      <select id="course" required>
-        <option value="">Select Course</option>
-        <option value="Class 11">Class 11</option>
-        <option value="Class 12">Class 12</option>
-        <option value="CA Foundation">CA Foundation</option>
-      </select>
-      <button type="submit">Enroll Now</button>
-    </form>
-  </section>
-
-  <!-- FACILITIES -->
-  <section class="facilities">
-    <h1>Our Facilities</h1>
-    <p>Where technology meets expertise for the ultimate learning experience!</p>
-    <div class="row">
-      <div class="facilities-col">
-        <img src="./images/library.png" alt="">
-        <h3>Expert Faculty</h3>
-        <p>6+ years of coaching experience</p>
-      </div>
-      <div class="facilities-col">
-        <img src="./images/basketball.png" alt="">
-        <h3>Proven Track Record</h3>
-        <p>Scored 90%+ in Class 12, Exemptions in CA Foundation & Intermediate</p>
-      </div>
-      <div class="facilities-col">
-        <img src="./images/cafeteria.png" alt="">
-        <h3>Smart Class Setup</h3>
-        <p>Laptop & LED TV for interactive learning</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials">
-    <h1>What Our Students Says</h1>
-    <p>Hear from those who have experienced the transformative learning journey with us.</p>
-    <div class="row">
-      <div class="testimonial-col">
-        <img src="./images/user1.jpg" alt="">
-        <div>
-          <p>“The coaching here is exceptional! With personalized attention and practical learning, I scored above 90% in my exams. The motivational sessions and face-to-face doubt solving were game-changers for me.”</p>
-          <h3>Hardik Arora</h3>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+    <!-- Facilities -->
+    <section class="facilities">
+      <h1>Our Facilities</h1>
+      <p>Where technology meets expertise for the ultimate learning experience!</p>
+      <div class="row">
+        <div class="facilities-col">
+          <img src="./images/library.png" alt="">
+          <h3>Expert Faculty</h3>
+          <p>6+ years of coaching experience</p>
+        </div>
+        <div class="facilities-col">
+          <img src="./images/basketball.png" alt="">
+          <h3>Proven Track Record</h3>
+          <p>Scored 90%+ in Class 12, Exemptions in CA Foundation & Intermediate </p>
+        </div>
+        <div class="facilities-col">
+          <img src="./images/cafeteria.png" alt="">
+          <h3>Smart Class Setup</h3>
+          <p>Laptop & LED TV for interactive learning</p>
         </div>
       </div>
-      <div class="testimonial-col">
-        <img src="./images/user2.jpg" alt="">
-        <div>
-          <p>“Vishesh Kapoor Classes truly lives up to its name. The structured approach and smart classes made complex subjects easy to understand. I highly recommend registering before April 5th to enjoy a discount!”</p>
-          <h3>Deepanshu Sharma</h3>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+    </section>
+
+    <!-- testimonials -->
+    <section class="testimonials">
+      <h1>What Our Students Says</h1>
+      <p>Hear from those who have experienced the transformative learning journey with us.</p>
+      <div class="row">
+        <div class="testimonial-col">
+          <img src="./images/user1.jpg" alt="">
+          <div>
+            <p>“The coaching here is exceptional! With personalized attention and practical learning, I scored above 90% in my exams. The motivational sessions and face-to-face doubt solving were game-changers for me.”</p>
+            <h3>Hardik Arora</h3>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+        </div>
+        <div class="testimonial-col">
+          <img src="./images/user2.jpg" alt="">
+          <div>
+            <p>“Vishesh Kapoor Classes truly lives up to its name. The structured approach and smart classes made complex subjects easy to understand. I highly recommend registering before April 5th to enjoy a discount!”</p>
+            <h3>Deepanshu Sharma</h3>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section class="faq-section">
-    <div class="faq-header">Your Queries, Answered</div>
-    <div class="faq-subtitle">Explore common questions about our coaching methods, courses, and more.</div>
-    <div class="faq-item">
-      <h3>What subjects do you offer?</h3>
-      <p>We provide comprehensive coaching for all commerce subjects in classes 11 and 12, including Accountancy, Business Studies, and Economics, as well as all CA Foundation subjects.</p>
-    </div>
-    <div class="faq-item">
-      <h3>How do you ensure effective learning?</h3>
-      <p>Our approach includes smart classes, practical knowledge, face-to-face learning, and regular tests with personalized feedback to ensure thorough understanding.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What are the benefits of joining?</h3>
-      <p>Experience a well-organized structure, motivational sessions, and personalized handwritten notes for last-minute revision, all designed to boost your performance.</p>
-    </div>
-    <div class="faq-item">
-      <h3>How can I register?</h3>
-      <p>Register before April 5th to enjoy a discount. Contact us for more details and experience the fun of learning concepts through practical applications.</p>
-    </div>
-    <a href="contact.html" class="contact-link">Contact us →</a>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <h6>Experience learning like never before</h6>
-    <p>Join us for a unique blend of practical knowledge and expert guidance. Register before April 5th for a special discount!</p>
-    <a href="contact.html" class="hero-btn">CONTACT US</a>
-  </section>
-
-  <!-- FOOTER -->
-  <section class="footer">
-    <h4>About Us</h4>
-    <p>
-      It all started with a dream to redefine commerce education with clarity, practicality, and a passion for teaching.
-      <br>
-      Today, that dream is a reality, empowering students to excel with knowledge that goes beyond textbooks.
-      <br>
-      Remember, failures are just stepping stones to success—learn from them, rise stronger, and keep moving forward!
-    </p>
-    <div id="h5b_whatsapp_chat">
-      <a href="https://api.whatsapp.com/send?text=hii i am looking for tution&phone=9837809547" target="_blank">
-        <img src="https://cdn.shopify.com/s/files/1/0070/3666/5911/files/icon_only_old.png?465/" alt="Whatsapp Icon" />
-      </a>
-    </div>
-    <p>Made With <i class="fa-solid fa-heart"></i> by Me, Vishesh</p>
-  </section>
-
-  <!-- MAIN JS -->
-  <script>
-    // Mobile menu toggles
-    function showMenu() {
-      document.getElementById('navLinks').style.right = "0";
-    }
-    function hideMenu() {
-      document.getElementById('navLinks').style.right = "-200px";
-    }
-
-    // Enrollment form submission
-    document.getElementById("enrollmentForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      let nameInput   = document.getElementById("name").value.trim();
-      let emailInput  = document.getElementById("email").value.trim();
-      let phoneInput  = document.getElementById("phone").value.trim();
-      let courseInput = document.getElementById("course").value.trim();
-
-      if (!/^\d{10}$/.test(phoneInput)) {
-        alert("Phone number must be exactly 10 digits.");
-        return;
+    <!-- FAQ Section -->
+    <style>
+      .faq-section {
+        width: 100vw;
+        max-width: 100%;
+        margin: 0;
+        padding: 40px 10%;
+        background-color: #000;
+        color: #fff;
+        border-radius: 0;
       }
-      if (nameInput === "") {
-        alert("Please enter your name.");
-        return;
+      .faq-item {
+        background-color: #111;
+        padding: 20px;
+        margin: 10px 0;
+        border-radius: 8px;
+        text-align: left;
+        border: 1px solid #222;
       }
-      if (courseInput === "") {
-        alert("Please select a course.");
-        return;
+      .faq-header, .faq-subtitle {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 20px;
       }
+      .faq-header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .faq-subtitle {
+        font-size: 16px;
+        color: #ccc;
+        margin-bottom: 30px;
+      }
+      .faq-item h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: #00d4ff;
+      }
+      .faq-item p {
+        font-size: 14px;
+        color: #ddd;
+        line-height: 1.5;
+      }
+      .contact-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 20px;
+        background-color: #00d4ff;
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+      .contact-link:hover {
+        background-color: #0088cc;
+      }
+      #h5b_whatsapp_chat {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      #h5b_whatsapp_chat a img {
+        width: 65px;
+        height: auto;
+        transition: transform 0.3s ease-in-out;
+      }
+      #h5b_whatsapp_chat a img:hover {
+        transform: scale(1.2) rotate(10deg);
+      }
+    </style>
+    <section class="faq-section">
+      <div class="faq-header">Your Queries, Answered</div>
+      <div class="faq-subtitle">Explore common questions about our coaching methods, courses, and more.</div>
+      <div class="faq-item">
+        <h3>What subjects do you offer?</h3>
+        <p>We provide comprehensive coaching for all commerce subjects in classes 11 and 12, including Accountancy, Business Studies, and Economics, as well as all CA Foundation subjects.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do you ensure effective learning?</h3>
+        <p>Our approach includes smart classes, practical knowledge, face-to-face learning, and regular tests with personalized feedback to ensure thorough understanding.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What are the benefits of joining?</h3>
+        <p>Experience a well-organized structure, motivational sessions, and personalized handwritten notes for last-minute revision, all designed to boost your performance.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How can I register?</h3>
+        <p>Register before April 5th to enjoy a discount. Contact us for more details and experience the fun of learning concepts through practical applications.</p>
+      </div>
+      <a href="contact.html" class="contact-link">Contact us →</a>
+    </section>
 
-      let requestData = {
-        name:  nameInput,
-        email: emailInput,
-        phone: phoneInput,
-        course: courseInput
-      };
+    <!-- Call to action -->
+    <section class="cta">
+      <h6>Experience learning like never before</h6>
+      <p>Join us for a unique blend of practical knowledge and expert guidance. Register before April 5th for a special discount!</p>
+      <a href="contact.html" class="hero-btn">CONTACT US</a>
+    </section>
 
-      // Submit to two SheetDB endpoints
-      fetch("https://sheetdb.io/api/v1/zp2nef7jdzvh2", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData)
-      });
-      fetch("https://sheetdb.io/api/v1/81tkj4ujj2dnp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData)
-      })
-      .then(res => res.json())
-      .then(_ => {
-        alert("Successfully Enrolled!");
-        document.getElementById("enrollmentForm").reset();
-      })
-      .catch(_ => {
-        alert("Error submitting form. Please try again.");
-      });
-    });
-  </script>
+    <!-- footer -->
+    <section class="footer">
+      <h4>About Us</h4>
+      <p>It all started with a dream to redefine commerce education with clarity, practicality, and a passion for teaching. <br> Today, that dream is a reality, empowering students to excel with knowledge that goes beyond textbooks. <br> Remember, failures are just stepping stones to success learn from them, rise stronger, and keep moving forward!</p>
+      <div id="h5b_whatsapp_chat">
+        <a href="https://api.whatsapp.com/send?text=hii i am looking for tution&phone=9837809547" target="_blank" data-message="[message]" data-number="[Phone Number]">
+          <img src="https://cdn.shopify.com/s/files/1/0070/3666/5911/files/icon_only_old.png?465/" alt="Whatsapp Icon" />
+        </a>
+      </div>
+      <p>Made With <i class="fa-solid fa-heart"></i> by Me, Vishesh</p>
+    </section>
 
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
-
-
-
-<!--
-  NOTE: Extra blank lines below to ensure the file is >525 lines.
--->
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
